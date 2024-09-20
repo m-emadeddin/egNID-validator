@@ -9,7 +9,7 @@ exclude = [
 ]
 
 # Enable specific error categories:
-select = [
+lint.select = [
     "E",  # Errors
     "F",  # Pyflakes (detects undefined names)
     "W",  # Warnings
