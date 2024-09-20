@@ -108,7 +108,7 @@ class EgyptianNationalIdValidator:
         """
         self.birth_century = CENTURY_ID[self.birth_century_code]
         self.birth_year: int = self.birth_century + int(self.birth_date[:2])
-        self.birth_month: str = MONTHS[self.birth_date[2:4]]
+        self.birth_month: int = int(self.birth_date[2:4])
         self.birth_day: int = int(self.birth_date[4:])
         self.data['birth_date'] = datetime(self.birth_year, self.birth_month, self.birth_day).date()
 
