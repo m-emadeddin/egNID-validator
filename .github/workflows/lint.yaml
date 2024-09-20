@@ -17,8 +17,8 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v4
-          python-version: '3.12'
-
+          python-version: '3.9'
+  
       - name: Install Ruff
         run: |
           python -m venv venv  # Create a virtual environment
