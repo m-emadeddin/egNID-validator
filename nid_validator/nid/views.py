@@ -8,7 +8,7 @@ def index(request, id: str) -> JsonResponse:
     """
         
     try:
-        national_id = EgyptianNationalIdValidator(id)
+        national_id: EgyptianNationalIdValidator = EgyptianNationalIdValidator(id)
     except:
         return JsonResponse({'error': 'Invalid National Id'}, status=400)
 
