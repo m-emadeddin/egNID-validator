@@ -1,15 +1,13 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from .EgyptianNationalIdValidator import EgyptianNationalIdValidator 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .EgyptianNationalIdValidator import EgyptianNationalIdValidator
 
-def index(request, id: str) -> JsonResponse:
-    """
-    Validate the national ID and return a JSON response.
-    """
-        
-    try:
-        national_id: EgyptianNationalIdValidator = EgyptianNationalIdValidator(id)
-    except:
-        return JsonResponse({'error': 'Invalid National Id'}, status=400)
+class NationalIdValidatorAPIView(APIView):
+    def get(self, request, id: str):
+        try:
+            validator = EgyptianNationalIdValidator(id)
+        except ValueError:
+            return Response({'error': 'Invalid National Id'}, status=status.HTTP_400_BAD_REQUEST)
 
-    return JsonResponse(national_id.data)
+        return Response(validator.data, status=status.HTTP_200_OK)

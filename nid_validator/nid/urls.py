@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from .views import NationalIdValidatorAPIView
 
 urlpatterns = [
-    path('<str:id>/', views.index, name='index'),
+    path('id/<str:id>/', NationalIdValidatorAPIView.as_view(), name='nid-validator'),
 ]
