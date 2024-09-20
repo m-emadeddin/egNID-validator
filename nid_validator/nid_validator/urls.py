@@ -23,7 +23,7 @@ from rest_framework import permissions
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="National ID Validator API",
+        title="Egyptian National ID Validator API",
         default_version="v1",
         description="API for validating and extracting data from Egyptian National IDs",
         terms_of_service="https://www.example.com/terms/",
@@ -36,7 +36,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("nid.urls")),  # Include your app's URLs
+    path("", include("nid.urls")),
     re_path(r"^swagger(?P<format>\.json|\.yaml)$", schema_view.without_ui(cache_timeout=0), name="schema-json"),
     path("swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
