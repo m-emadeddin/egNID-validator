@@ -1,0 +1,20 @@
+[tool.ruff]
+line-length = 88
+fix = true
+exclude = [
+    ".git",
+    "__pycache__",
+    "migrations",
+    "static",
+]
+
+# Enable specific error categories:
+select = [
+    "E",  # Errors
+    "F",  # Pyflakes (detects undefined names)
+    "W",  # Warnings
+    "C",  # Complexity
+    "I",  # Import sorting
+    "D",  # Docstrings
+    "Q",  # Quotes (double vs single)
+]
