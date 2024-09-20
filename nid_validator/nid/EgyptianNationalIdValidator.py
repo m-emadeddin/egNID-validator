@@ -1,5 +1,5 @@
 import re
-
+from datetime import datetime
 EgNID_REGEX: str = r"^(2|3)[0-9]{2}[0-1][0-9][0-3][0-9](01|02|03|04|11|12|13|14|15|16|17|18|19|21|22|23|24|25|26|27|28|29|31|32|33|34|35|88)\d{5}$"
 
 
@@ -85,7 +85,9 @@ class EgyptianNationalIdValidator:
         Returns:
             bool: True if the ID is valid, False otherwise.
         """
-        return bool(re.match(EgNID_REGEX, self.id))
+        valid = re.match(EgNID_REGEX, self.id)
+        if valid: return True
+        else: return False
 
 
     def _extract_data(self) -> None:
@@ -108,7 +110,7 @@ class EgyptianNationalIdValidator:
         self.birth_year: int = self.birth_century + int(self.birth_date[:2])
         self.birth_month: str = MONTHS[self.birth_date[2:4]]
         self.birth_day: int = int(self.birth_date[4:])
-        self.data['birth_date'] = f"{self.birth_month}, {self.birth_day}, {self.birth_year}"
+        self.data['birth_date'] = datetime(self.birth_year, self.birth_month, self.birth_day).date()
 
 
     def _get_governorate(self) -> None:
