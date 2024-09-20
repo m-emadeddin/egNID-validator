@@ -1,0 +1,3 @@
+class EgyptianNationalIdValidator:
+    
+    pass
