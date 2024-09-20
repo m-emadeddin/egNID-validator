@@ -58,8 +58,7 @@ class EgyptianNationalIdValidatorTest(unittest.TestCase):
 class NationalIdValidatorAPITest(APITestCase):
 
     def test_valid_national_id(self):
-        """Test that a valid national ID returns the correct data.
-        """
+        """Test that a valid national ID returns the correct data."""
         # Valid ID (January 15, 1999, Cairo, Female)
         url = reverse("nid-validator", args=["29901150101921"])
         response = self.client.get(url)
@@ -72,8 +71,7 @@ class NationalIdValidatorAPITest(APITestCase):
         self.assertEqual(response.data["gender"], "Female")
 
     def test_invalid_national_id(self):
-        """Test that an invalid national ID returns a 400 Bad Request.
-        """
+        """Test that an invalid national ID returns a 400 Bad Request."""
         # Invalid ID (wrong century code)
         url = reverse("nid-validator", args=["49901150101921"])
         response = self.client.get(url)
@@ -82,8 +80,7 @@ class NationalIdValidatorAPITest(APITestCase):
         self.assertEqual(response.data["error"], "Invalid National Id")
 
     def test_invalid_governorate_code(self):
-        """Test that an invalid governorate code in the national ID returns a 400 Bad Request.
-        """
+        """Test that an invalid governorate code in the national ID returns a 400 Bad Request."""
         # Invalid governorate code (99 doesn't exist)
         url = reverse("nid-validator", args=["29901159901921"])
         response = self.client.get(url)

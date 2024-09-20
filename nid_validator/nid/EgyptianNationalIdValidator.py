@@ -57,14 +57,14 @@ GOVERNORATES: dict[str, str] = {
 
 
 class EgyptianNationalIdValidator:
-    """This class is used to validate and extract data from Egyptian National ID numbers.
+    """A class to validate and extract data from Egyptian National ID numbers.
     """
 
     def __init__(self, id: str) -> None:
-        """Initialize the class with a national ID number.
+        """Initialize the validator with the National ID string.
 
         Args:
-            id (str): The national ID number.
+            id (str): The Egyptian National ID.
 
         """
         self.id: str = id
@@ -79,20 +79,20 @@ class EgyptianNationalIdValidator:
 
 
     def is_valid_nid(self) -> bool:
-        """Validate the national ID using a regular expression.
+        """Validates the national ID using a regular expression.
 
         Returns:
             bool: True if the ID is valid, False otherwise.
 
         """
         valid = re.match(EgNID_REGEX, self.id)
-        if valid: return True
-        else: return False
+        if valid:
+            return True
+        return False
 
 
     def _extract_data(self) -> None:
-        """Parse the string and extract data from the ID number.
-        """
+        """Parse the string and extract data from the ID number."""
         self.birth_century_code: int = int(self.id[0])
         self.birth_date: str = self.id[1:7]
         self.governorate_code: str = self.id[7:9]
@@ -102,8 +102,7 @@ class EgyptianNationalIdValidator:
 
 
     def _get_date_of_birth(self) -> None:
-        """Extract the birth date from the national ID and store it in the data dictionary.
-        """
+        """Extract the birth date from the national ID and store it in the data dictionary."""
         self.birth_century = CENTURY_ID[self.birth_century_code]
         self.birth_year: int = self.birth_century + int(self.birth_date[:2])
         self.birth_month: int = int(self.birth_date[2:4])
@@ -112,20 +111,17 @@ class EgyptianNationalIdValidator:
 
 
     def _get_governorate(self) -> None:
-        """Convert the governorate code to the governorate name and store it in the data dictionary.
-        """
+        """Convert the governorate code to the governorate name and store it in the data dictionary."""
         self.data["governorate"] = GOVERNORATES[self.governorate_code]
 
 
     def _get_gender(self) -> None:
-        """Convert the gender code to male or female and store it in the data dictionary.
-        """
+        """Convert the gender code to male or female and store it in the data dictionary."""
         self.data["gender"] = "Female" if self.gender_code % 2 == 0 else "Male"
 
 
     def __str__(self) -> str:
-        """Return a formatted string of the fields extracted from the ID number.
-        """
+        """Return a formatted string of the fields extracted from the ID number."""
         return (f"id: {self.id} \n"
                 f"birth_century: {self.birth_century_code} \n"
                 f'birth_date: {self.data["birth_date"]} \n'
