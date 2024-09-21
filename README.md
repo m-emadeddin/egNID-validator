@@ -189,10 +189,10 @@ C-YYMMDD-VV-IIIG-X
    - If the ID’s governorate code does not exist in the predefined list of governorates, it returns an error message.
 
 4. **Gender Identification**:
-   - The gender is determined by the last digit of the sequence (`iiig`) in the ID. Odd numbers (1, 3, 5, 7, 9) represent males, while even numbers (2, 4, 6, 8) represent females.
+   - The gender is determined by the last digit of the sequence (`IIIG`) in the ID. Odd numbers (1, 3, 5, 7, 9) represent males, while even numbers (2, 4, 6, 8) represent females.
 
 5. **Checksum Handling (optional for future updates)**:
-   - Currently, the code does not check the final checksum digit (`z`) in the ID, which is used by the Ministry of Interior to ensure authenticity. This could be added as a future improvement.
+   - Currently, the code does not check the final checksum digit (`X`) in the ID, which is used by the Ministry of Interior to ensure authenticity. This could be added as a future improvement if more data is available.
 
 6. **Error Handling and Robustness**:
    - Invalid IDs, whether due to incorrect length, invalid date formats, or governorate codes, trigger appropriate error responses.
